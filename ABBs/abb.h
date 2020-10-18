@@ -15,6 +15,6 @@ void leftRotate(ABBNode* root, ABBNode* x);
 void rightRotate(ABBNode* root, ABBNode* x);
 void fixPut(ABBNode* root, ABBNode* z);
 void put(ABBNode* root, int key, int val);
-
+void RBtransplant(ABBNode* root, ABBNode* x, ABBNode* y);
 
 #endif // ABB_H_INCLUDED

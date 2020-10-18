@@ -190,6 +190,23 @@ void put(ABBNode* root, int key, int val){
     return;
 }
 
+void RBtransplant(ABBNode* root, ABBNode* x, ABBNode* y){
+    if (x->parent == NULL){
+        root = y;
+    }
+    else if (x == x->parent->left){
+        x->parent->left = y;
+    }
+    else {
+        x->parent->right = y;
+    }
+    y->parent = x->parent;
+    return;
+}
+
+void RBdelete(ABBNode* root, ABBNode* z){
+    ABBNode* y = NULL; // Nodo Auxiliar
+}
 
 
 
