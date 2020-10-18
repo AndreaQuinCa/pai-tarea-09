@@ -1,6 +1,7 @@
-#include <stdio.h>
+#include "abb.c"
+#include <assert.h>
 #include <stdlib.h>
-#include "abb.h"
+#include <stdio.h>
 
 int test_put_element(void);
 
@@ -16,8 +17,11 @@ int test_put_element(void){
   // Create RBT
   ABBNode *trial;
   trial = newABBNode(10,2);
-  
-  free_THeap(&trial);
+  if(isEmpty(trial) != 1){puts("ERROR"); return 0;}
+  if(size(trial) != 1)   {puts("ERROR"); return 0;}
+
+  put(trial,2,3);
+
   puts("OK");
   return 1;
 }

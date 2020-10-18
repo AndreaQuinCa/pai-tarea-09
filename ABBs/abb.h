@@ -16,5 +16,10 @@ void rightRotate(ABBNode* root, ABBNode* x);
 void fixPut(ABBNode* root, ABBNode* z);
 void put(ABBNode* root, int key, int val);
 void RBtransplant(ABBNode* root, ABBNode* x, ABBNode* y);
-
+void RBdelete(ABBNode* root, ABBNode* z);
+int get(ABBNode* root, int key);
+int contains(ABBNode* root, int key);
+int isEmpty(ABBNode* root);
+int size(ABBNode* root);
+int blacksize(ABBNode *root);
 #endif // ABB_H_INCLUDED
