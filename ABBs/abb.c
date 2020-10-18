@@ -97,7 +97,7 @@ void fixPut(ABBNode* root, ABBNode* z){
     haber violado al insertar el nuevo nodo*/
 
     //Sólo había un nodo
-    if(z->parent == NULL){
+    if(root->parent == NULL){
         root->color = 0;
         return;
     }
@@ -147,7 +147,6 @@ void fixPut(ABBNode* root, ABBNode* z){
     }
     root->color = 0;
 }
-
 
 void put(ABBNode* root, int key, int val){
     /*Inserta un par en el árbol, si la llave existe
@@ -244,7 +243,6 @@ int isEmpty(ABBNode* root){
 }
 
 int size(ABBNode* root){
-    if (root->parent == NULL) return 1;
     if (root->left == NULL || root->right == NULL) {
         return 1;
     }
@@ -252,10 +250,10 @@ int size(ABBNode* root){
     int left_size  = size(root->left);
     int right_size = size(root->right);
     if (left_size > right_size){
-        return left_size;
+        return left_size+1;
     }
     else{
-        return right_size;
+        return right_size+1;
     }
 }
 
