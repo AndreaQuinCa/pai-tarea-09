@@ -309,7 +309,7 @@ void delete(ABBNode* root, ABBNode* z){
 int get(ABBNode* root, int key){
     ABBNode* x = root;               //Variable para avanzar en el árbol
     
-    while(x != NULL && key !=x->key){
+    while(x != NULL){
         if(key == x->key){
             return x->data;
         }
@@ -317,12 +317,11 @@ int get(ABBNode* root, int key){
             x = x->right;
         }
         else{
-            x->data = key;           // Busco en la Izquierda
+            x = x->left;           // Busco en la Izquierda
         }
     } 
     return -1; 
 }
-
 
 int contains(ABBNode* root, int key){
     ABBNode* x = root;          //Variable para avanzar en el árbol
