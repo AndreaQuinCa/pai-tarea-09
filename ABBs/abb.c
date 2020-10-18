@@ -240,10 +240,7 @@ int contains(ABBNode* root, int key){
 }
 
 int isEmpty(ABBNode* root){
-    if (root->parent == NULL){
-        return 1;
-    }
-    return 0;
+    return root == NULL;
 }
 
 int size(ABBNode* root){
