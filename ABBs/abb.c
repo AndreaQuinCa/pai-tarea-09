@@ -200,7 +200,7 @@ void transplant(ABBNode* root, ABBNode* x, ABBNode* y){
 
 void deletefixput(ABBNode* root, ABBNode* x){
     ABBNode* w = NULL;
-    while (x->parent != NULL && x->color == 0){
+    while (x->parent != root && x->color == 0){
         if (x == x->parent->left){
             w = x->parent->right;
             // Caso 1
@@ -211,7 +211,7 @@ void deletefixput(ABBNode* root, ABBNode* x){
                 w = x->parent->right;
             }
             // Caso 2
-            if (w->left->color == 0 && w->right->color ==0){
+            if (w->left->color == 0 && w->right->color == 0){
                 w->color == 1;
                 x = x->parent;
             }
@@ -252,7 +252,7 @@ void deletefixput(ABBNode* root, ABBNode* x){
             }
             w->color = x->parent->color;
             x->parent->color = 0;
-            w->left->color  = 0;
+            w->left->color   = 0;
             rightRotate(root,x->parent);
             x = root;
         }
@@ -269,11 +269,13 @@ ABBNode *minimum(ABBNode *x){
 }
 
 void delete(ABBNode* root, ABBNode* z){
-    ABBNode* y = NULL; // Nodo Auxiliar
-    ABBNode* x = NULL; // Nodo Auxiliar
+    if (get(root,z->key == -1)) return; // Reviso que exista llave
 
+    ABBNode* y = NULL;                  // Nodo Auxiliar
+    ABBNode* x = NULL;                  // Nodo Auxiliar
     y = z;
     int y_original_color = y->color;
+    
     if (z->left == NULL){
         x = z->right;
         transplant(root,z,z->right);
@@ -302,6 +304,8 @@ void delete(ABBNode* root, ABBNode* z){
     if (y_original_color == 0){
         deletefixput(root,x);
     }
+    printf("Se borró correctamente nodo  con llave %i.\n", z->key);
+    free(z);
     return;
 }
 
