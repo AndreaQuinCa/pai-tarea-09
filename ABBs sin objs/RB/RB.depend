@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1603128483 source:c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs sin objs\rb\abb.c
+	<stdio.h>
+	<stdlib.h>
+
+1603125898 source:c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs sin objs\rb\main.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	"abb.h"
+	"tests.h"
+
+1603128577 source:c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs sin objs\rb\tests.c
+	<assert.h>
+	<stdlib.h>
+	<stdio.h>
+	"abb.h"
+
+1603129385 c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs sin objs\rb\abb.h
+
+1603125287 c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs sin objs\rb\tests.h
+
