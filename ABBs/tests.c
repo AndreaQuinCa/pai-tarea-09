@@ -11,32 +11,54 @@ int test_put_element(void){
   RBTree *trial;
   trial = newRBTree();
   put(trial,11,1);
-  inOrderPrintTree(trial,trial->root);
-  printf("\n");
+  // probando con getdata
+  if(getData(trial,2) != -1){puts("ERROR"); return 0;}
+
   put(trial,2,50);
-  inOrderPrintTree(trial,trial->root);
-  printf("\n");
+  // Probando con getdata
+  if(getData(trial,2) != 50){puts("ERROR"); return 0;}
+
   put(trial,14,7);
-  inOrderPrintTree(trial,trial->root);
+  // Probando con tamaño
+  if(size(trial) != 3){puts("ERROR"); return 0;}
+
+  put(trial,1,200);
+  if(size(trial) != 4){puts("ERROR"); return 0;}
+  if(contains(trial,14) != 1){puts("ERROR"); return 0;}
+
+  put(trial,7,4);
+  if(size(trial) != 5){puts("ERROR"); return 0;}
+  if(getData(trial,200) != -1){puts("ERROR"); return 0;}
+
+  showRBT(trial,trial->root);
   printf("\n");
-  put(trial,3,200);
-  put(trial,5,4);
-
-
-  /*trial = newABBNode(11,2);
-  if(isEmpty(trial) != 0){puts("ERROR"); return 0;}
-  if(get(trial,10) != 2)   {puts("ERROR"); return 0;}
-
-  put(trial,2,15);
-  if(isEmpty(trial) != 0){puts("ERROR"); return 0;}
-  if(get(trial,2) != 15)   {puts("ERROR"); return 0;}
-
-  inOrderPrintTree(trial);
-  printf("\n");*/
 
   puts("OK");
   return 1;
 }
+
+int test_delete_element(void){
+  printf("*- Test Delete Element -*\n");
+  // Create RBT
+RBTree *trial;
+trial = newRBTree();
+put(trial,11,1);
+put(trial,2,50);
+put(trial,14,7);
+put(trial,1,200);
+put(trial,7,4);
+showRBT(trial,trial->root);
+
+deleteNode(trial,1);
+deleteNode(trial,11);
+
+showRBT(trial,trial->root);
+
+
+  puts("OK");
+  return 1;
+}
+
 
 int inOrderPrintTree(RBTree *tree, ABBNode* root){
     if(root !=tree->nil){
@@ -45,3 +67,24 @@ int inOrderPrintTree(RBTree *tree, ABBNode* root){
         inOrderPrintTree(tree, root->right);
     }
 }
+
+void showsubtree(RBTree *tree, ABBNode *root, int space) { 
+  ABBNode *temp;
+  // Si apunta a nil, no imprimo
+  if (root == tree->nil) return; 
+  // Separacion de 10
+  space += 8; 
+  // Imprime subarbol derecho
+  showsubtree(tree, root->right, space); 
+  printf("\n"); 
+  for (int i = 8; i < space; i++) printf(" "); 
+  printf("%d(%i)\n", root->key,root->color); 
+  // Imprime subarbol izquierdo
+  showsubtree(tree, root->left, space); 
+} 
+  
+void showRBT(RBTree *tree, ABBNode *root) { 
+  printf("* --------- R B  T r e e --------- *");
+   showsubtree(tree, root, 0); 
+   printf("* ----------------------------- *\n");
+} 

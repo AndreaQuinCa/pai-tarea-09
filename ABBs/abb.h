@@ -24,7 +24,7 @@ void fixPut(RBTree* root, ABBNode* z);
 void put(RBTree* root, int key, int val);
 void transplant(RBTree* root, ABBNode* x, ABBNode* y);
 void deletefixput(RBTree* root, ABBNode* x);
-void deleteNode(RBTree* root, ABBNode* z);
+void deleteNode(RBTree* root, int key);
 int getData(RBTree* root, int key);
 int contains(RBTree* root, int key);
 int isEmpty(RBTree* root);
