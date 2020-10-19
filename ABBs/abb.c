@@ -94,7 +94,10 @@ void rightRotate(RBTree* root, ABBNode* x){
 void fixPut(RBTree* root, ABBNode* z){
     /*Corrige las propiedades de ABB que se pudieron
     haber violado al insertar el nuevo nodo*/
-
+    if(z->parent == root->nil){
+        z->color = 0;
+        return;
+    }
     //Sólo hay que hacer modificaciones si el padre
     //del nuevo nodo es rojo
     while(z->parent->color == 1){
