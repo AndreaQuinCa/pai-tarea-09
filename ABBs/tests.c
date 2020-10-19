@@ -37,7 +37,7 @@ int test_put_element(void){
   return 1;
 }
 
-int test_delete_element(void){
+int test_delete_esteban_element(void){
   printf("*- Test Delete Element -*\n");
   // Create RBT
 RBTree *trial;

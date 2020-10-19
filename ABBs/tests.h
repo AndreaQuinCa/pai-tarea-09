@@ -3,7 +3,7 @@
 
 
 int test_put_element(void);
-int test_delete_element(void);
+int test_delete_esteban_element(void);
 
 int inOrderPrintTree(RBTree *tree,ABBNode* root);
 void showsubtree(RBTree *tree, ABBNode *root, int space);
