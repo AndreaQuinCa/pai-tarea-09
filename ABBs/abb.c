@@ -1,23 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "abb.h"
 
-typedef struct ABBNodeStruct{
-    struct ABBNodeStruct* left;
-    struct ABBNodeStruct* right;
-    struct ABBNodeStruct* parent;
-    int data;
-    int key;
-    int color; //0 negro, 1 rojo
-}ABBNode;
-
-typedef struct RBTreeStruct{
-    ABBNode* root;
-    ABBNode* nil;
-    int size;
-}RBTree;
-
-int isEmpty(RBTree* root);
-int getData(RBTree* root, int key);
+// Definicion de estructuras en archivo .h
 
 ABBNode* newABBNode(int key, int val){
     //Inicializa nuevo nodo
@@ -26,17 +11,17 @@ ABBNode* newABBNode(int key, int val){
         printf("No se concedio memoria para nuevo nodo\n");
         return NULL;
     }
-    z->left   = NULL;
-    z->right  = NULL;
-    z->parent = NULL;
     z->color  = 1;    //Color igual a rojo
     z->data   = val;
     z->key    = key;
+    z->left   = NULL;
+    z->right  = NULL;
+    z->parent = NULL;
     return z;
 }
 
 RBTree* newRBTree(){
-    RBTree *newtree = (RBTree*) malloc(sizeof(RBTree));
+    RBTree *newtree = (RBTree*) malloc (sizeof(RBTree));
     if(newtree == NULL){
         printf("No se concedio memoria para nuevo nodo\n");
         return NULL;
@@ -162,16 +147,16 @@ void put(RBTree* root, int key, int val){
     el valor anterior se reemplaza por val, sino, se
     agrega en una hoja. Regresa un apuntador a la nueva
     raíz.*/
-
     //Busca al padre como en un árbol de búsqueda sencillo
     ABBNode* y = root->nil; //Auxiliar para guardar al padre
     ABBNode* x = root->root; //Variable para avanzar en el árbol
+    ABBNode* z = newABBNode(key, val);
     while(x != root->nil){
         y = x;
-        if(key < x->key){
+        if(z->key < x->key){
             x = x->left;
         }
-        else if(key > x->key) {
+        else if(z->key > x->key) {
             x = x->right;
         }
         else{
@@ -180,18 +165,21 @@ void put(RBTree* root, int key, int val){
         }
     }
 
-    ABBNode* z = newABBNode(key, val);
     z->parent = y;
-    if(y!= root->nil && key<y->key){
+    if (y == root->nil) {
+        root->root = z;
+    }
+    else if (z->key < y->key){
         y->left = z;
     }
-    else if(y!= root->nil && key>y->key){
+    else {
         y->right = z;
     }
-
+    // Apunto a NIL
+    z->left  = root->nil;
+    z->right = root->nil;
     fixPut(root, z);
     root->size++;
-    return;
 }
 /* ********************** Funciones para Delete ********************** */
 void transplant(RBTree* root, ABBNode* x, ABBNode* y){

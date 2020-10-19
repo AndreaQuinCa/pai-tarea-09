@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 int test_put_element(void);
-
+int inOrderPrintTree(RBTree *tree,ABBNode* root);
 int main(int num_args, char ** args){
   int all_tests_ok = 1;
   all_tests_ok &= test_put_element();
@@ -17,10 +17,18 @@ int test_put_element(void){
   // Create RBT
   RBTree *trial;
   trial = newRBTree();
+  put(trial,11,1);
+  inOrderPrintTree(trial,trial->root);
+  printf("\n");
   put(trial,2,50);
-  put(trial,14,3);
-  put(trial,1,100);
-  put(trial,7,97);
+  inOrderPrintTree(trial,trial->root);
+  printf("\n");
+  put(trial,14,7);
+  inOrderPrintTree(trial,trial->root);
+  printf("\n");
+  put(trial,3,200);
+  put(trial,5,4);
+
 
   /*trial = newABBNode(11,2);
   if(isEmpty(trial) != 0){puts("ERROR"); return 0;}
@@ -37,3 +45,10 @@ int test_put_element(void){
   return 1;
 }
 
+int inOrderPrintTree(RBTree *tree, ABBNode* root){
+    if(root !=tree->nil){
+        inOrderPrintTree(tree, root->left);
+        printf(" [key= %d, data = %d, color = %d]  ", root->key, root->data, root->color);
+        inOrderPrintTree(tree, root->right);
+    }
+}
