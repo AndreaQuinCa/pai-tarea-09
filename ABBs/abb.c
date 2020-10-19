@@ -338,7 +338,7 @@ int contains(ABBNode* root, int key){
             x = x->right;
         }
         else{
-            x->data = key;           // Busco en la Izquierda
+            x = x->left;           // Busco en la Izquierda
         }
     }
     return 0;
