@@ -59,6 +59,15 @@ void freeNode(ABBNode **z){
     *z = NULL;
 }
 
+void inOrderFreeTree(RBTree *tree, ABBNode* root){
+    if(root !=tree->nil){
+        inOrderFreeTree(tree, root->left);
+        freeNode(&root);
+        inOrderFreeTree(tree, root->right);
+    }
+}
+
+
 
 //Auxiliares
 int isEmpty(RBTree* root){
@@ -287,7 +296,7 @@ void deletefixput(RBTree* root, ABBNode* x){
             }
             // Caso 2
             if (w->left->color == 0 && w->right->color == 0){
-                w->color == 1;
+                w->color = 1;
                 x = x->parent;
             }
             // Caso 3
@@ -315,7 +324,7 @@ void deletefixput(RBTree* root, ABBNode* x){
             }
             // Caso 2
             if (w->right->color == 0 && w->left->color == 0){
-                w->color == 1;
+                w->color = 1;
                 x = x->parent;
             }
             // Caso 3
@@ -387,6 +396,7 @@ ABBNode *getNode(RBTree *root, int key){
 }
 
 void deleteNode(RBTree* root, int key){
+
     if (getData(root,key) == -1) return; // Reviso que exista llave
 
     ABBNode* z = getNode(root,key);
@@ -425,4 +435,5 @@ void deleteNode(RBTree* root, int key){
     }
     printf("Se borró correctamente nodo  con llave %i.\n", z->key);
     freeNode(&z);
+    return;
 }

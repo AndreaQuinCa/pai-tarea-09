@@ -20,6 +20,7 @@ typedef struct RBTreeStruct{
 ABBNode* newABBNode(int key, int val);
 RBTree* newRBTree();
 void freeNode(ABBNode **z);
+void inOrderFreeTree(RBTree *tree, ABBNode* root);
 
 //Auxuliares
 int contains(RBTree* root, int key);
