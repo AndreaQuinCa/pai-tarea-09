@@ -18,3 +18,27 @@
 	<stdlib.h>
 	"abb.h"
 
+1603078689 source:c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs\main.c
+	<stdio.h>
+	<stdlib.h>
+	"abb.h"
+	"tests.h"
+
+1603079956 c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs\abb.h
+
+1603078689 c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs\tests.h
+
+1603079561 source:c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs\tests.c
+	<assert.h>
+	<stdlib.h>
+	<stdio.h>
+	"abb.c"
+
+1603079852 c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs\abb.c
+	<stdio.h>
+	<stdlib.h>
+
+1603079852 source:c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs\abb.c
+	<stdio.h>
+	<stdlib.h>
+

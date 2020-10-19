@@ -1,18 +1,10 @@
-#include "abb.c"
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "abb.c"
 
-int test_put_element(void);
-int inOrderPrintTree(ABBNode* root);
-void showRBT(ABBNode *root);
 
-int main(int num_args, char ** args){
-  int all_tests_ok = 1;
-  all_tests_ok &= test_put_element();
-  assert(all_tests_ok);
-  return 0;
-}
+
 
 int test_put_element(void){
   printf("*- Test Put Element -*\n");
@@ -57,22 +49,22 @@ int inOrderPrintTree(ABBNode* root){
     }
 }
 
-void showsubtree(ABBNode *root, int space) { 
+void showsubtree(ABBNode *root, int space) {
   ABBNode *temp;
-  // Base case 
-  if (root == NULL) return; 
+  // Base case
+  if (root == NULL) return;
   // Separacion de 10
-  space += 10; 
+  space += 10;
   // Imprime subarbol derecho
-  showsubtree(root->right, space); 
-  printf("\n"); 
-  for (int i = 10; i < space; i++) printf(" "); 
-  printf("%d(%i)\n", root->key,root->color); 
+  showsubtree(root->right, space);
+  printf("\n");
+  for (int i = 10; i < space; i++) printf(" ");
+  printf("%d(%i)\n", root->key,root->color);
   // Imprime subarbol izquierdo
-  showsubtree(root->left, space); 
-} 
-  
-void showRBT(ABBNode *root) { 
-   showsubtree(root, 0); 
+  showsubtree(root->left, space);
+}
+
+void showRBT(ABBNode *root) {
+   showsubtree(root, 0);
    printf("* **************************** *\n");
-} 
+}

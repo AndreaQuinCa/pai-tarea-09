@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 typedef struct ABBNodeStruct{
     struct ABBNodeStruct* left;
     struct ABBNodeStruct* right;
@@ -28,10 +29,10 @@ ABBNode* newABBNode(int key, int val){
 }
 
 //O(1)
-void leftRotate(ABBNode* root, ABBNode* x){
+void leftRotate(ABBNode** root, ABBNode* x){
 /*Toma la raíz de un subárbol lo rota hacia la izquierda*/
     if(x->right == NULL){
-        printf("La rotacion del nodo x=%d, en invalida\n", x->key);
+        printf("La rotacion del nodo key=%d, en invalida\n", x->key);
         return;
     }
     ABBNode* y = x->right;
@@ -45,12 +46,12 @@ void leftRotate(ABBNode* root, ABBNode* x){
 
     //Vincula a y con el padre de x
     if(x->parent == NULL){
-        root = y;
+        *root = y;
     }
     else if(x == x->parent->left){
         x->parent->left = y;
     }
-    else if(x == x->parent->right){
+    else{
         x->parent->right = y;
     }
 
@@ -61,10 +62,10 @@ void leftRotate(ABBNode* root, ABBNode* x){
 }
 
 //O(1)
-void rightRotate(ABBNode* root, ABBNode* x){
+void rightRotate(ABBNode** root, ABBNode* x){
 /*Toma la raíz de un subárbol lo rota hacia la derecha*/
     if(x->left == NULL){
-        printf("La rotacion del nodo x=%d, en invalida\n", x->key);
+        printf("La rotacion del nodo key=%d, en invalida\n", x->key);
         return;
     }
     ABBNode* y = x->left;
@@ -78,12 +79,12 @@ void rightRotate(ABBNode* root, ABBNode* x){
 
     //Vincula a y con el padre de x
     if(x->parent==NULL){
-        root = y;
+        *root = y;
     }
     else if(x == x->parent->right){
         x->parent->right = y;
     }
-    else if(x == x->parent->left){
+    else{
         x->parent->left = y;
     }
 
@@ -92,13 +93,13 @@ void rightRotate(ABBNode* root, ABBNode* x){
     x->parent = y;
 }
 
-void fixPut(ABBNode* root, ABBNode* z){
+void fixPut(ABBNode** root, ABBNode* z){
     /*Corrige las propiedades de ABB que se pudieron
     haber violado al insertar el nuevo nodo*/
 
     //Sólo había un nodo
-    if(root->parent == NULL){
-        root->color = 0;
+    if(z->parent == NULL){
+        z->color = 0;
         return;
     }
     //Sólo hay que hacer modificaciones si el padre
@@ -112,20 +113,22 @@ void fixPut(ABBNode* root, ABBNode* z){
                 z->parent->color         = 0;
                 y->color                 = 0;
                 z->parent->parent->color = 1;
-                z                        = z->parent->parent; 
+                z                        = z->parent->parent;
                 //Se puede provocar una violación al nivel del abuelo
             }
             //Caso en el que el tío es negro, se corrige con rotaciones
-            else if(z == z->parent->right){
-                z = z->parent;
-                leftRotate(root, z);
+            else{
+                if(z == z->parent->right){
+                    z = z->parent; //El padre ahora es hijo rojo izquierdo del recién insertado rojo
+                    leftRotate(root, z);
+                }
+                z->parent->color         = 0;
+                z->parent->parent->color = 1;
+                rightRotate(root, z->parent->parent);
             }
-            z->parent->color         = 0;
-            z->parent->parent->color = 1;
-            rightRotate(root, z->parent->parent);
         }
         //Caso en el que el papá es el hijo derecho del abuelo
-        if(z->parent == z->parent->parent->right){
+        else{
             ABBNode* y = z->parent->parent->left; //Tío
             //Caso en el que el tío es rojo, se intercambian los colores
             if(y->color==1){
@@ -136,19 +139,21 @@ void fixPut(ABBNode* root, ABBNode* z){
                 //Se puede provocar una violación al nivel del abuelo
             }
             //Caso en el que el tío es negro, se corrige con rotaciones
-            else if(z == z->parent->left){
-                z = z->parent;
-                rightRotate(root, z);
+            else{
+                if(z == z->parent->left){
+                    z = z->parent;
+                    rightRotate(root, z);
+                }
+                z->parent->color         = 0;
+                z->parent->parent->color = 1;
+                leftRotate(root, z->parent->parent);
             }
-            z->parent->color         = 0;
-            z->parent->parent->color = 1;
-            leftRotate(root, z->parent->parent);
         }
     }
-    root->color = 0;
+    (*root)->color = 0;
 }
 
-void put(ABBNode* root, int key, int val){
+void put(ABBNode** root, int key, int val){
     /*Inserta un par en el árbol, si la llave existe
     el valor anterior se reemplaza por val, sino, se
     agrega en una hoja. Regresa un apuntador a la nueva
@@ -156,10 +161,10 @@ void put(ABBNode* root, int key, int val){
 
     //Busca al padre como en un árbol de búsqueda sencillo
     ABBNode* y = NULL; //Auxiliar para guardar al padre
-    ABBNode* x = root; //Variable para avanzar en el árbol
+    ABBNode* x = *root; //Variable para avanzar en el árbol
     while(x != NULL){
         y = x;
-        if(key < root->key){
+        if(key < x->key){
             x = x->left;
         }
         else if(key > x->key) {
@@ -172,11 +177,18 @@ void put(ABBNode* root, int key, int val){
     }
 
     ABBNode*z = newABBNode(key, val);
+    if(z==NULL){
+        return;
+    }
     z->parent = y;
-    if(y!= NULL && key<y->key){
+    if(y==NULL){
+        *root = z;
+
+    }
+    else if(key<y->key){
         y->left = z;
     }
-    else if(y!= NULL && key>y->key){
+    else{
         y->right = z;
     }
 
@@ -228,7 +240,7 @@ void deletefixput(ABBNode* root, ABBNode* x){
             leftRotate(root,x->parent);
             x = root;
         }
-        
+
         if (x == x->parent->right){
             w = x->parent->left;
             // Caso 1
@@ -268,14 +280,14 @@ ABBNode *minimum(ABBNode *x){
     return x;
 }
 
-void delete(ABBNode* root, ABBNode* z){
+void delete_ABB(ABBNode* root, ABBNode* z){
     if (get(root,z->key == -1)) return; // Reviso que exista llave
 
     ABBNode* y = NULL;                  // Nodo Auxiliar
     ABBNode* x = NULL;                  // Nodo Auxiliar
     y = z;
     int y_original_color = y->color;
-    
+
     if (z->left == NULL){
         x = z->right;
         transplant(root,z,z->right);
@@ -299,7 +311,7 @@ void delete(ABBNode* root, ABBNode* z){
         transplant(root,z,y);
         y->left = z->left;
         y->left->parent = y;
-        y->color = z->color;    
+        y->color = z->color;
     }
     if (y_original_color == 0){
         deletefixput(root,x);
@@ -312,7 +324,7 @@ void delete(ABBNode* root, ABBNode* z){
 /* ********************** Funciones Especiales ********************** */
 int get(ABBNode* root, int key){
     ABBNode* x = root;               //Variable para avanzar en el árbol
-    
+
     while(x != NULL){
         if(key == x->key){
             return x->data;
@@ -323,8 +335,8 @@ int get(ABBNode* root, int key){
         else{
             x = x->left;           // Busco en la Izquierda
         }
-    } 
-    return -1; 
+    }
+    return -1;
 }
 
 int contains(ABBNode* root, int key){
@@ -348,21 +360,14 @@ int isEmpty(ABBNode* root){
     return root == NULL;
 }
 
-int size(ABBNode* root){
-    if (root->left == NULL || root->right == NULL) {
-        return 1;
+int size_ABB(ABBNode* root){
+    if (root== NULL) {
+        return 0;
     }
 
-    int left_size  = size(root->left);
-    int right_size = size(root->right);
-    if (left_size > right_size){
-        return left_size+1;
-    }
-    else{
-        return right_size+1;
-    }
-}
-
-int blacksize(ABBNode *root){
+    int left_size  = size_ABB(root->left);
+    int right_size = size_ABB(root->right);
+    return left_size + right_size +1;
 
 }
+

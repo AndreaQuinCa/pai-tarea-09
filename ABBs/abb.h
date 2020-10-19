@@ -11,15 +11,19 @@ typedef struct ABBNodeStruct{
 }ABBNode;
 
 ABBNode* newABBNode(int key, int val);
-void leftRotate(ABBNode* root, ABBNode* x);
-void rightRotate(ABBNode* root, ABBNode* x);
-void fixPut(ABBNode* root, ABBNode* z);
-void put(ABBNode* root, int key, int val);
+void leftRotate(ABBNode** root, ABBNode* x);
+void rightRotate(ABBNode** root, ABBNode* x);
+void fixPut(ABBNode** root, ABBNode* z);
+void put(ABBNode** root, int key, int val);
+
 void transplant(ABBNode* root, ABBNode* x, ABBNode* y);
-void delete(ABBNode* root, ABBNode* z);
+void deletefixput(ABBNode* root, ABBNode* x);
+ABBNode *minimum(ABBNode *x);
+void delete_ABB(ABBNode* root, ABBNode* z);
+
 int get(ABBNode* root, int key);
 int contains(ABBNode* root, int key);
 int isEmpty(ABBNode* root);
-int size(ABBNode* root);
-int blacksize(ABBNode *root);
+int size_ABB(ABBNode* root);
+
 #endif // ABB_H_INCLUDED
