@@ -4,6 +4,14 @@
 
 #include "abb.h"
 
+void inOrderPrintTree(RBTree *tree, ABBNode* root){
+    if(root !=tree->nil){
+        inOrderPrintTree(tree, root->left);
+        printf(" [key= %d, data = %d, color = %d]  ", root->key, root->data, root->color);
+        inOrderPrintTree(tree, root->right);
+    }
+}
+
 int test_put_element(void){
   printf("*- Test Put Element -*\n");
   // Create RBT
@@ -47,10 +55,4 @@ int test_put_element(void){
   return 1;
 }
 
-int inOrderPrintTree(RBTree *tree, ABBNode* root){
-    if(root !=tree->nil){
-        inOrderPrintTree(tree, root->left);
-        printf(" [key= %d, data = %d, color = %d]  ", root->key, root->data, root->color);
-        inOrderPrintTree(tree, root->right);
-    }
-}
+

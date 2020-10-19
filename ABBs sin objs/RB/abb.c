@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+//Estructuras
+
 typedef struct ABBNodeStruct{
     struct ABBNodeStruct* left;
     struct ABBNodeStruct* right;
@@ -48,6 +51,15 @@ RBTree* newRBTree(){
     return newtree;
 }
 
+void freeNode(ABBNode **z){
+    (*z)->left   = NULL;
+    (*z)->right  = NULL;
+    (*z)->parent = NULL;
+    free(*z);
+    *z = NULL;
+}
+
+
 //Auxiliares
 int isEmpty(RBTree* root){
     if (root == NULL){
@@ -61,7 +73,7 @@ int isEmpty(RBTree* root){
 
 int contains(RBTree* root, int key){
     ABBNode* x;          //Variable para avanzar en el árbol
-    if (isEmpty(root) == 0){
+    if (isEmpty(root) == 1){
         printf("Árbol vacío.\n");
         return 0;
     }
@@ -77,9 +89,9 @@ int contains(RBTree* root, int key){
             x = x->left;           // Busco en la Izquierda
         }
     }
+    freeNode(&x);
     return 0;
 }
-
 
 int size(RBTree* root){
     return root->size;
@@ -245,6 +257,7 @@ void put(RBTree* root, int key, int val){
     root->size++;
 }
 
+
 //Delete
 void transplant(RBTree* root, ABBNode* x, ABBNode* y){
     if (x->parent == root->nil){
@@ -352,9 +365,31 @@ int getData(RBTree* root, int key){
     return -1;
 }
 
-void deleteNode(RBTree* root, ABBNode* z){
-    if (getData(root,z->key) == -1) return; // Reviso que exista llave
+ABBNode *getNode(RBTree *root, int key){
+    ABBNode* x;                      // Variable para avanzar en el árbol
+    if (isEmpty(root) != 0){
+        printf("Árbol vacío.\n");
+        return root->nil;
+    }
+    x = root->root;
+    while(x != NULL){
+        if(key == x->key){
+            return x;
+        }
+        else if(key > x->key) {      // Busco en la derecha
+            x = x->right;
+        }
+        else{
+            x = x->left;           // Busco en la Izquierda
+        }
+    }
+    return root->nil;
+}
 
+void deleteNode(RBTree* root, int key){
+    if (getData(root,key) == -1) return; // Reviso que exista llave
+
+    ABBNode* z = getNode(root,key);
     ABBNode* y = NULL;                  // Nodo Auxiliar
     ABBNode* x = NULL;                  // Nodo Auxiliar
     y = z;
@@ -389,6 +424,5 @@ void deleteNode(RBTree* root, ABBNode* z){
         deletefixput(root,x);
     }
     printf("Se borró correctamente nodo  con llave %i.\n", z->key);
-    free(z);
-    return;
+    freeNode(&z);
 }
