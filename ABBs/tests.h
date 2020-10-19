@@ -3,6 +3,7 @@
 
 
 int test_put_element(void);
-int test_delete(void);
+int inOrderPrintTree(RBTree *tree,ABBNode* root);
+
 
 #endif // TESTS_H_INCLUDED
