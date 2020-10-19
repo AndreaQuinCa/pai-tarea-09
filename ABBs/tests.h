@@ -3,6 +3,6 @@
 
 
 int test_put_element(void);
-
+int test_delete(void);
 
 #endif // TESTS_H_INCLUDED

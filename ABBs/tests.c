@@ -3,14 +3,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int test_put_element(void);
 
-int main(int num_args, char ** args){
-  int all_tests_ok = 1;
-  all_tests_ok &= test_put_element();
-  assert(all_tests_ok);
-  return 0;
-}
+
+
 
 int test_put_element(void){
   printf("*- Test Put Element -*\n");
@@ -29,3 +24,12 @@ int test_put_element(void){
   puts("OK");
   return 1;
 }
+
+int inOrderPrintTree(ABBNode* root){
+    if(root != NULL){
+        inOrderPrintTree(x->left);
+        printf(" [key= %d, data = %d]  ", root->key, root->data);
+        inOrderPrintTree(x->right);
+    }
+}
+

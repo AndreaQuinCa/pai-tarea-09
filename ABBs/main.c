@@ -5,6 +5,10 @@
 
 int main()
 {
-    printf("Hello world!\n");
+    int all_tests_ok = 1;
+//    all_tests_ok &= test_put_element();
+    all_tests_ok &= test_delete();
+    assert(all_tests_ok);
     return 0;
+
 }
