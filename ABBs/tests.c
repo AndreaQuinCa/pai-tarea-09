@@ -2,8 +2,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "abb.c"
+int test_put_element(void);
+int inOrderPrintTree(ABBNode* root);
 
-
+int main(int num_args, char ** args){
+  int all_tests_ok = 1;
+  all_tests_ok &= test_put_element();
+  assert(all_tests_ok);
+  return 0;
+}
 
 
 int test_put_element(void){
@@ -11,18 +18,18 @@ int test_put_element(void){
   // Create RBT
   ABBNode *trial;
   trial = newABBNode(11,1);
-  put(trial,2,50);
+  put(&trial,2,50);
   inOrderPrintTree(trial);
   printf("\n");
-  put(trial,14,3);
+  put(&trial,14,3);
   inOrderPrintTree(trial);
     printf("\n");
 
-  put(trial,1,100);
+  put(&trial,1,100);
   inOrderPrintTree(trial);
     printf("\n");
 
-  put(trial,7,97);
+  put(&trial,7,97);
   inOrderPrintTree(trial);
     printf("\n");
 
