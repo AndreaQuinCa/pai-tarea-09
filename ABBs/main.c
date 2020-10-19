@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "abb.h"
-#include "tests.h"
+#include <assert.h>
 
-int main()
-{
-    printf("Hello world!\n");
-    return 0;
+#include "abb.c"
+#include "tests.c"
+
+int main(int num_args, char ** args){
+  int all_tests_ok = 1;
+  all_tests_ok &= test_put_element();
+  assert(all_tests_ok);
+  return 0;
 }

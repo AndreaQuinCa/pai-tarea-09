@@ -10,16 +10,24 @@ typedef struct ABBNodeStruct{
     int color; //0 negro, 1 rojo
 }ABBNode;
 
+typedef struct RBTreeStruct{
+    ABBNode* root;
+    ABBNode* nil;
+    int size;
+}RBTree;
+
 ABBNode* newABBNode(int key, int val);
-void leftRotate(ABBNode* root, ABBNode* x);
-void rightRotate(ABBNode* root, ABBNode* x);
-void fixPut(ABBNode* root, ABBNode* z);
-void put(ABBNode* root, int key, int val);
-void transplant(ABBNode* root, ABBNode* x, ABBNode* y);
-void delete(ABBNode* root, ABBNode* z);
-int get(ABBNode* root, int key);
-int contains(ABBNode* root, int key);
-int isEmpty(ABBNode* root);
-int size(ABBNode* root);
-int blacksize(ABBNode *root);
+RBTree* newRBTree();
+void leftRotate(RBTree* root, ABBNode* x);
+void rightRotate(RBTree* root, ABBNode* x);
+void fixPut(RBTree* root, ABBNode* z);
+void put(RBTree* root, int key, int val);
+void transplant(RBTree* root, ABBNode* x, ABBNode* y);
+void deletefixput(RBTree* root, ABBNode* x);
+void deleteNode(RBTree* root, ABBNode* z);
+int getData(RBTree* root, int key);
+int contains(RBTree* root, int key);
+int isEmpty(RBTree* root);
+int size(RBTree* root);
+int blacksize(RBTree *root);
 #endif // ABB_H_INCLUDED
