@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+
 #include "abb.c"
-#include "abb.h"
-#include "tests.h"
 #include "tests.c"
 
 int main(int num_args, char ** args){

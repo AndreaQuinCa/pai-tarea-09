@@ -1,4 +1,6 @@
 #include "abb.h"
+#include "tests.h"
+
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
