@@ -60,10 +60,19 @@ void freeNode(ABBNode **z){
 }
 
 void inOrderFreeTree(RBTree *tree, ABBNode* root){
+
     if(root !=tree->nil){
+        //Libera rama izquierda
         inOrderFreeTree(tree, root->left);
-        freeNode(&root);
+
+        //Libera rama derecha
         inOrderFreeTree(tree, root->right);
+
+        //Libera el centro
+        freeNode(&root);
+
+
+
     }
 }
 

@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1603155790 source:c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs sin objs\rb\abb.c
+	<stdio.h>
+	<stdlib.h>
+
+1603141575 source:c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs sin objs\rb\main.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	"abb.h"
+	"tests.h"
+
+1603148728 source:c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs sin objs\rb\tests.c
+	<assert.h>
+	<stdlib.h>
+	<stdio.h>
+	"abb.h"
+
+1603147993 c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs sin objs\rb\abb.h
+
+1603142232 c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\abbs sin objs\rb\tests.h
+
+1603156929 source:c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\codigo_rb\abb.c
+	<stdio.h>
+	<stdlib.h>
+
+1603148728 source:c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\codigo_rb\tests.c
+	<assert.h>
+	<stdlib.h>
+	<stdio.h>
+	"abb.h"
+
+1603147993 c:\users\luna_\documents\cursos\p y a\tareas\tarea 9\pai-tarea-09\codigo_rb\abb.h
+

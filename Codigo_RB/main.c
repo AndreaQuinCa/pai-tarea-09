@@ -8,7 +8,7 @@
 int main()
 {
     int all_tests_ok = 1;
-    //  all_tests_ok &= test_put_element();
+    all_tests_ok &= test_put_element();
     all_tests_ok &= test_delete_element();
     assert(all_tests_ok);
     return 0;
